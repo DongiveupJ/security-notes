@@ -1,0 +1,13 @@
+---
+layout: default
+---
+{% assign post_category = page.categories | first %}
+{% assign category = site.category_index | where: 'slug', post_category | first %}
+<article>
+  <header class="post-header">
+    <a class="back-link" href="{{ '/' | relative_url }}">전체 기록으로 돌아가기</a>
+    <h1>{{ page.title | escape }}</h1>
+    <div class="post-meta"><a class="category-tag" href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }}</a><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time><span>{{ site.author }}</span></div>
+  </header>
+  {{ content }}
+</article>
