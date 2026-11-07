@@ -10,11 +10,15 @@ layout: default
     <div class="post-meta"><a class="category-tag" href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }}</a><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time><span>{{ site.author }}</span></div>
   </header>
   {{ content }}
+  {% assign siblings = site.categories[post_category] %}
   <footer class="post-end">
-    {% if page.previous or page.next %}<nav class="post-nav" aria-label="이어서 읽기">
-      {% if page.previous %}<a class="prev" href="{{ page.previous.url | relative_url }}"><span>이전 기록</span><strong>{{ page.previous.title | escape }}</strong></a>{% endif %}
-      {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><span>다음 기록</span><strong>{{ page.next.title | escape }}</strong></a>{% endif %}
-    </nav>{% endif %}
-    <p class="post-more"><a href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }} 기록 더 보기</a></p>
+    <nav class="cat-list" aria-labelledby="cat-list-title">
+      <div class="cat-list-head"><h2 id="cat-list-title"><a href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }}</a> 카테고리의 글</h2><span class="count">{{ siblings.size }}개</span></div>
+      <ol class="cat-items">
+        {% for p in siblings %}<li><a href="{{ p.url | relative_url }}"{% if p.url == page.url %} aria-current="page"{% endif %}><span>{{ p.title | escape }}</span><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: '%Y.%m.%d' }}</time></a></li>
+        {% endfor %}
+      </ol>
+      <div class="pager" hidden></div>
+    </nav>
   </footer>
 </article>
