@@ -5,8 +5,11 @@ is_home: true
 ---
 <div id="home-intro">
   <section class="hero" aria-label="블로그 소개">
+    <figure class="hero-art"><img src="{{ '/assets/img/hero.png' | relative_url }}" alt="" width="506" height="216"></figure>
+    <div>
     <h1>이해한 만큼,<br><em>기록</em>으로 남기기.</h1><p>개발하며 만난 문제, 보안을 공부하며 생긴 질문.<br>결과뿐 아니라 그 답에 도달한 과정까지 정리합니다.</p>
     <p class="manifesto">Knights Frontier 3기와 함께 시작하는 학습 기록</p>
+    </div>
   </section>
 </div>
 <section class="records" aria-labelledby="records-heading">
@@ -16,11 +19,11 @@ is_home: true
   {% assign post_category = post.categories | first %}
   {% assign category = site.category_index | where: 'slug', post_category | first %}
   <article class="entry" data-category="{{ post_category | escape }}">
-    <div class="entry-meta"><a class="category-tag" href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }}</a><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time></div>
+    <a class="entry-icon" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">{% include icon.html name=post_category px=28 %}</a>
     <div>
     <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
     <p class="excerpt">{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 | escape }}</p>
-    <a class="read-link" href="{{ post.url | relative_url }}">기록 읽기</a>
+    <div class="entry-meta"><a class="category-tag" href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }}</a><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time><a class="read-link" href="{{ post.url | relative_url }}">기록 읽기</a></div>
     </div>
   </article>
   {% endfor %}
