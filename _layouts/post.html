@@ -10,4 +10,11 @@ layout: default
     <div class="post-meta"><a class="category-tag" href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }}</a><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time><span>{{ site.author }}</span></div>
   </header>
   {{ content }}
+  <footer class="post-end">
+    {% if page.previous or page.next %}<nav class="post-nav" aria-label="이어서 읽기">
+      {% if page.previous %}<a class="prev" href="{{ page.previous.url | relative_url }}"><span>이전 기록</span><strong>{{ page.previous.title | escape }}</strong></a>{% endif %}
+      {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><span>다음 기록</span><strong>{{ page.next.title | escape }}</strong></a>{% endif %}
+    </nav>{% endif %}
+    <p class="post-more"><a href="{{ '/' | relative_url }}#category={{ post_category }}">{{ category.name | default: post_category | escape }} 기록 더 보기</a></p>
+  </footer>
 </article>
