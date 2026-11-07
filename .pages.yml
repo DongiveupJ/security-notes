@@ -24,7 +24,7 @@ content:
         type: date
         options:
           time: true
-          format: "yyyy-MM-dd HH:mm:ss xx"
+          format: "yyyy-MM-dd HH:mm:ss"
       - name: category
         label: 카테고리
         type: select
